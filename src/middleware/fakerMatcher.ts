@@ -31,7 +31,7 @@ function getFakerValues() {
       subKeys.forEach(sk => res[sk] = k);
       return res;
     }, {});
- }
+}
 
 /**
  * Go through all of the faker values and
@@ -88,14 +88,15 @@ const mappedFakerValues = getFakerValues();
  */
 const addFakerToDefinition = (definition: any) => {
   if (!Object.keys(definition.properties).length) {
-    throw new Error('The JSON schema passed does not have any properties, cannot inject faker values');
+    return;
+    // throw new Error('The JSON schema passed does not have any properties, cannot inject faker values');
   }
 
   // Now we will attempt to guess the closest faker match
   const propertiesCopy = Object.assign({}, definition.properties);
   const propsWithFaker = Object.keys(propertiesCopy)
     .map(k => findClosestMatch(k, mappedFakerValues))
-    .filter(match => match.cost < COST_CAP )
+    .filter(match => match.cost < COST_CAP)
     .map(({ prop, match }) => (
       {
         [prop]: {
