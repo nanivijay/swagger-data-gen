@@ -1,4 +1,3 @@
-import * as SwaggerParser from 'swagger-parser';
 import * as jsf from 'json-schema-faker';
 import * as faker from 'faker';
 import * as formatters from './formatters';
@@ -8,10 +7,11 @@ import { binary, byte, fullDate, password } from './formatters';
 import { configure, generateData } from './utils';
 import { Formatter, Middleware, BuildOptions } from './types';
 import { Spec as Swagger } from 'swagger-schema-official';
+import { SwaggerParser, bundle, dereference } from 'swagger-parser';
 
 jsf.extend('faker', () => faker);
 
-  // if this is set, it will override all other middleware config values. true will enable all, false will disable all
+// if this is set, it will override all other middleware config values. true will enable all, false will disable all
 const DEFAULT_CONFIG_FORMATTER = { default: true };
 const DEFAULT_CONFIG_MIDDLEWARE = { default: true };
 
@@ -42,7 +42,7 @@ export function build(swaggerSchema: string | Swagger, config: BuildOptions = {}
   // apply any registered formatters
   _formatters.forEach(({ formatName, callback }) => jsf.format(formatName, callback));
 
-  return SwaggerParser.bundle(swaggerSchema)
+  return bundle(swaggerSchema)
     .then((api: Swagger) => {
       // create a registered array of middleware based on the configuration
       const _middleware = configure(CORE_MIDDLEWARE, configurationM);
@@ -52,7 +52,7 @@ export function build(swaggerSchema: string | Swagger, config: BuildOptions = {}
       _middleware.forEach(m => modifiedApi = m(modifiedApi));
       return modifiedApi;
     })
-    .then((api: Swagger) => SwaggerParser.dereference(api))
+    .then((api: Swagger) => dereference(api))
     .catch((err: Error) => {
       throw new Error(`Error has occured when trying to bundle and dereference the OpenAPI / Swagger object. \n Error: ${err}`);
     });
@@ -87,5 +87,5 @@ export default class SwaggerDataGen {
   public static middleware: Middleware[] = CORE_MIDDLEWARE;
   public static formatters: Formatter[] = CORE_FORMATTERS;
   public static build = build;
-  public static generate  = generate;
+  public static generate = generate;
 }
