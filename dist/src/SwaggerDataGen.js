@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var SwaggerParser = require("swagger-parser");
 var jsf = require("json-schema-faker");
 var faker = require("faker");
 var middleware_1 = require("./middleware");
 var formatters_1 = require("./formatters");
 var utils_1 = require("./utils");
+var swagger_parser_1 = require("swagger-parser");
 jsf.extend('faker', function () { return faker; });
 // if this is set, it will override all other middleware config values. true will enable all, false will disable all
 var DEFAULT_CONFIG_FORMATTER = { default: true };
@@ -37,7 +37,7 @@ function build(swaggerSchema, config) {
         var formatName = _a.formatName, callback = _a.callback;
         return jsf.format(formatName, callback);
     });
-    return SwaggerParser.bundle(swaggerSchema)
+    return swagger_parser_1.bundle(swaggerSchema)
         .then(function (api) {
         // create a registered array of middleware based on the configuration
         var _middleware = utils_1.configure(exports.CORE_MIDDLEWARE, configurationM);
@@ -46,7 +46,7 @@ function build(swaggerSchema, config) {
         _middleware.forEach(function (m) { return modifiedApi = m(modifiedApi); });
         return modifiedApi;
     })
-        .then(function (api) { return SwaggerParser.dereference(api); })
+        .then(function (api) { return swagger_parser_1.dereference(api); })
         .catch(function (err) {
         throw new Error("Error has occured when trying to bundle and dereference the OpenAPI / Swagger object. \n Error: " + err);
     });
