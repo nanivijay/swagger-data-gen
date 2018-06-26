@@ -9,4 +9,4 @@ import { Spec as Swagger } from 'swagger-schema-official';
  * @param {SwaggerObject} api  - an Swagger / OpenAPI object to parse
  * @returns {SwaggerObject}    - a new Swagger / OpenAPI object with an updated definitions property.
  */
-export declare const fakerDate: (api: Swagger) => Swagger;
+export declare const fakerDate: (api: any) => Swagger;

@@ -6,7 +6,7 @@ import { Spec as Swagger } from 'swagger-schema-official';
  * @param {object} api  - an Swagger / OpenAPI object to parse
  * @returns {object}    - a new Swagger / OpenAPI object with an updated definitions property;
  */
-export const requireProps = (api: Swagger): Swagger => {
+export const requireProps = (api: any): Swagger => {
   const { definitions } = api;
 
   if (!definitions || !Object.keys(definitions).length) {

@@ -5,4 +5,4 @@ import { Spec as Swagger } from 'swagger-schema-official';
  * @param {object} api  - an Swagger / OpenAPI object to parse
  * @returns {object}    - a new Swagger / OpenAPI object with an updated definitions property;
  */
-export declare const requireProps: (api: Swagger) => Swagger;
+export declare const requireProps: (api: any) => Swagger;

@@ -27,7 +27,7 @@ function injectDateFaker(definition: any) {
  * @param {SwaggerObject} api  - an Swagger / OpenAPI object to parse
  * @returns {SwaggerObject}    - a new Swagger / OpenAPI object with an updated definitions property.
  */
-export const fakerDate = (api: Swagger): Swagger => {
+export const fakerDate = (api: any): Swagger => {
   const { definitions } = api;
 
   if (!definitions || !Object.keys(api.definitions).length) {
