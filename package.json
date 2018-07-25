@@ -1,6 +1,6 @@
 {
   "name": "swagger-data-gen",
-  "version": "0.2.0-beta.1",
+  "version": "0.2.1",
   "description": "Generate mock data for a swagger document.",
   "main": "./dist/src/SwaggerDataGen.js",
   "types": "./dist/src/types/index.d.ts",
@@ -50,7 +50,7 @@
     "@types/faker": "4.1.2",
     "@types/lodash": "4.14.110",
     "@types/node": "10.3.6",
-    "@types/swagger-parser": "4.0.2",
+    "@types/swagger-parser": "^4.0.2",
     "@types/swagger-schema-official": "2.0.10",
     "ava": "^0.25.0",
     "nodemon": "1.17.5",
